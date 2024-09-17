@@ -45,12 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "users",
+    "board",
     "django_filters",
     "rest_framework_simplejwt",
     "drf_yasg",
     "corsheaders",
-    "djoser",
     "django_rest_passwordreset",
+    "djoser",
 ]
 
 DJOSER = {
@@ -58,10 +59,7 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {
-        'password_reset': 'djoser.email.PasswordResetEmail',
-        'password_changed_confirmation': 'djoser.email.PasswordChangedConfirmationEmail'
-        },
+    'SERIALIZERS': {},
 }
 
 MIDDLEWARE = [
@@ -179,6 +177,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "UPDATE_LAST_LOGIN": True,
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -187,7 +186,7 @@ EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+# EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
 
 SERVER_EMAIL = EMAIL_HOST_USER

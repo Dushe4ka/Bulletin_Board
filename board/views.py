@@ -20,7 +20,7 @@ class FeedbackCreateAPIView(CreateAPIView):
 
 
 class FeedbackListAPIView(ListAPIView):
-    queryset = Feedback.objects.all().order_by('-date')
+    queryset = Feedback.objects.all().order_by('-created_at')
     serializer_class = FeedbackSerializer
     permission_classes = [IsAuthenticated,]
 
@@ -43,11 +43,13 @@ class AdvertisementCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated,]
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        advertisement = serializer.save()
+        advertisement.author = self.request.user
+        advertisement.save()
 
 
 class AdvertisementListAPIView(ListAPIView):
-    queryset = Feedback.objects.all().order_by('-date')
+    queryset = Advertisement.objects.all().order_by('-created_at')
     serializer_class = AdvertisementSerializer
     pagination_class = AdvertisementPaginator
 

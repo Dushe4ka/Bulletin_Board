@@ -55,8 +55,7 @@ class User(AbstractUser):
 
     image = models.ImageField(
         upload_to="users/image/",
-        blank=True,
-        null=True,
+        **NULLABLE,
         verbose_name="Аватар",
         help_text="Загрузите аватар",
     )

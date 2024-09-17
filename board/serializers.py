@@ -9,17 +9,16 @@ class FeedbackSerializer(ModelSerializer):
 
 
 class AdvertisementSerializer(ModelSerializer):
-    count_of_feedback = SerializerMethodField
-    feedbacks = SerializerMethodField
+    count_of_feedback = SerializerMethodField()
+    feedbacks = SerializerMethodField()
 
     def get_count_of_feedback(self, advertisement):
         return advertisement.feedbacks.count()
 
-    def get_feedback(self, advertisement):
-        feedback_set = Feedback.objects.filter(advertisement=advertisement.id)
+    def get_feedbacks(self, advertisement):
+        feedback_set = Feedback.objects.filter(ad=advertisement.id)
         return [feedback.text for feedback in feedback_set]
 
     class Meta:
         model = Advertisement
-        fields = "__all__"
-        
+        fields = ("title", "price", "author", "count_of_feedback", "feedbacks", "created_at")

@@ -16,4 +16,5 @@ eventlet==0.36.1
 django-celery-beat==2.6.0
 django-cors-headers==4.4.0
 setuptools==74.1.2
+djoser==2.2.3
 

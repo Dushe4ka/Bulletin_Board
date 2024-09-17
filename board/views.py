@@ -3,7 +3,8 @@ from rest_framework.generics import (CreateAPIView, DestroyAPIView,
                                      ListAPIView, RetrieveAPIView,
                                      UpdateAPIView, get_object_or_404)
 from rest_framework.permissions import IsAuthenticated
-
+from django_filters import rest_framework as filters
+from board.filters import AdvertisementFilter
 from board.models import Advertisement, Feedback
 from board.paginators import AdvertisementPaginator
 from board.serializers import FeedbackSerializer, AdvertisementSerializer
@@ -52,6 +53,8 @@ class AdvertisementListAPIView(ListAPIView):
     queryset = Advertisement.objects.all().order_by('-created_at')
     serializer_class = AdvertisementSerializer
     pagination_class = AdvertisementPaginator
+    filterset_class = AdvertisementFilter
+    filter_backends = (filters.DjangoFilterBackend,)
 
 
 class AdvertisementRetrieveAPIView(RetrieveAPIView):

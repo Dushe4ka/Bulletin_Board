@@ -6,7 +6,11 @@ class IsModer(permissions.BasePermission):
        Проверяет, является ли пользователь модератором.
     """
     def has_permission(self, request, view):
-        return request.user.groups.filter(name="moderators").exists()
+        if request.user.role == "Администратор":
+            return True
+        return False
+
+    # request.user.groups.filter(name="admin").exists()
 
 
 class IsOwner(permissions.BasePermission):

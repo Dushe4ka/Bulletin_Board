@@ -15,7 +15,7 @@ class UsersTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_user_create(self):
-        url = reverse("users:user_register")
+        url = reverse("users:register")
         data = {
             "email": "test1@example.com",
             "password": "12345",
